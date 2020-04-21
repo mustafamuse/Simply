@@ -20,8 +20,8 @@
       <thead>
         <tr>
           <th>Full URL</th>
-          <th>Short URL</th>
-          <th>Clicks</th>
+          <th>Shortened URL</th>
+  
         </tr>
       </thead>
       <tbody>
@@ -29,7 +29,6 @@
             <tr>
               <td><a href="<%= shortUrl.fullUrl %>"><%= shortUrl.fullUrl %></a></td>
               <td><a href="<%= shortUrl.shortUrl %>"><%= shortUrl.shortUrl  %></a></td>
-              <td><%= shortUrl.clicks %></td>
             </tr>
           <% }) %>
       </tbody>

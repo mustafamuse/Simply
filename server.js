@@ -3,7 +3,7 @@ const mongoose = require("mongoose")
 const shortenedUrls = require("./models/shortenedUrls")
 const app = express()
 
-mongoose.connect('mongodb://localhost/urlShortener', {
+mongoose.connect( process.env.MONGO_URL || "mongodb://localhost/bitlyClone", {
   useNewUrlParser: true, useUnifiedTopology: true
 })
 .then(() => console.log('MongoDB Connected...'))
@@ -28,7 +28,6 @@ app.get('/:shortUrl', async (req, res) => {
   const selectedUrl = await shortenedUrls.findOne({ shortUrl: req.params.shortUrl })
   if (selectedUrl == null) return res.sendStatus(404)
 
-  selectedUrl.clicks++
   selectedUrl.save()
 
   res.redirect(selectedUrl.fullUrl)
