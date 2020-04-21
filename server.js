@@ -3,26 +3,35 @@ const mongoose = require("mongoose")
 const shortenedUrls = require("./models/shortenedUrls")
 const app = express()
 
-mongoose.connect("mongodb://localhost/bitlyClone", {
-    useNewUrlParser: true, useUnifiedTopology: true
+mongoose.connect('mongodb://localhost/urlShortener', {
+  useNewUrlParser: true, useUnifiedTopology: true
 })
 .then(() => console.log('MongoDB Connected...'))
 .catch((err) => console.log(err))
 
 
-app.set("view engine", "ejs")
-app.use(express.urlencoded({ extended: false})) // so i can access the params from my request
+app.set('view engine', 'ejs')
+app.use(express.urlencoded({ extended: false }))
 
-app.get("/", async (request,response) =>{
-    const allShortUrls = await shortenedUrls.find()
-    console.log(allShortUrls)
-    response.render("index", {shortenedUrls: allShortUrls})
+app.get('/', async (req, res) => {
+  const shortUrls = await shortenedUrls.find()
+  res.render('index', { shortenedUrls: shortUrls })
 })
 
-app.post("/shortenedUrls", async (request, response) =>{
-await shortenedUrls.create({ 
-    fullUrl: request.body.fullUrl
+app.post('/shortenedUrls', async (req, res) => {
+  await shortenedUrls.create({ fullUrl: req.body.fullUrl })
+
+  res.redirect('/')
 })
-response.redirect("/")
+
+app.get('/:shortUrl', async (req, res) => {
+  const selectedUrl = await shortenedUrls.findOne({ shortUrl: req.params.shortUrl })
+  if (selectedUrl == null) return res.sendStatus(404)
+
+  selectedUrl.clicks++
+  selectedUrl.save()
+
+  res.redirect(selectedUrl.fullUrl)
 })
+
 app.listen(process.env.PORT || 5000);
