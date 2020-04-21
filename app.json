@@ -1,0 +1,8 @@
+{
+    "name": "Simply",
+    "description": "Bitly Clone",
+    "repository": "https://github.com/umpp101/simply",
+    "keywords": ["node", "express", "mongo", "ejs", "url"],
+    "addons": ["mongolab:sandbox"],
+    "success_url": "/"
+  }
