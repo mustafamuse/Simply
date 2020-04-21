@@ -9,7 +9,17 @@
 </head>
 <body>
   <div class="container">
+    <br/>
+    <br/>
+    <br/>
     <h1>Bitly Clone</h1>
+    <br/>
+    <br/>
+    
+    <h3>A simple url shortener created using: NodeJs, MongoDB, Express, EJS and Bootstrap </h3>
+    <br/>
+    <br/>
+    <p>Make sure you write your url correctly, for ex: "https://www.github.com/umpp101"</p>
     <form action="/shortenedUrls" method="POST" class="my-4 form-inline">
       <label for="fullUrl" class="sr-only">Url</label>
       <input required placeholder="Url" type="url" name="fullUrl" id="fullUrl" class="form-control col mr-2">
@@ -20,15 +30,15 @@
       <thead>
         <tr>
           <th>Full URL</th>
-          <th>Shortened URL</th>
+          <th>Shortened</th>
   
         </tr>
       </thead>
       <tbody>
         <% shortenedUrls.forEach(shortUrl => { %>
             <tr>
-              <td><a href="<%= shortUrl.fullUrl %>"><%= shortUrl.fullUrl %></a></td>
-              <td><a href="<%= shortUrl.shortUrl %>"><%= shortUrl.shortUrl  %></a></td>
+              <td class="col mr-2"><a href="<%= shortUrl.fullUrl %>"><%= shortUrl.fullUrl %></a></td>
+              <td class="col mr-2"><a href="<%= shortUrl.shortUrl %>"><%= shortUrl.shortUrl  %></a></td>
             </tr>
           <% }) %>
       </tbody>
