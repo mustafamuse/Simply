@@ -13,8 +13,10 @@ mongoose.connect("mongodb://localhost/bitlyClone", {
 app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: false})) // so i can access the params from my request
 
-app.get("/", (request,response) =>{
-    response.render("index")
+app.get("/", async (request,response) =>{
+    const allShortUrls = await shortenedUrls.find()
+    console.log(allShortUrls)
+    response.render("index", {shortenedUrls: allShortUrls})
 })
 
 app.post("/shortenedUrls", async (request, response) =>{

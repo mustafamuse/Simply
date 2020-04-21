@@ -6,12 +6,12 @@ const shortenedUrlSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    ShortenedUrl: {
+    shortenedUrl: {
         type: String,
         required: true,
         default: shortId.generate
     },
-    Clicks: {
+    clicks: {
         type: Number,
         required: true,
         default: 0
